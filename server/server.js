@@ -9,7 +9,8 @@ const { CONNECTION_STRING, PORT} = process.env;
 app.use(express.json())
 app.use(cors())
 
-app.get('/api/storeData', fetching.callForData)
+app.get('/api/getGifs', fetching.getGifs)
+app.post('/api/storeData', fetching.callForData)
 
 
 
