@@ -9,18 +9,37 @@ export class Gifs extends Component {
   };
 
   componentDidMount() {
+  this.getGifs()
+  
+  }
+
+  getGifs = () => {
     axios.get("/api/getGifs").then(res => {
-      console.log(res);
       this.setState({
         gifs: res.data
       });
     });
+    this.deleteDupes()
+  }
+
+  deleteDupes = () => {
+    axios.delete('/api/noDupes').then(res => {
+      
+    })
+  }
+
+  
+  getMoreGifs = () => {
+    axios.post("/api/storeData").then(res => {
+      this.deleteDupes()
+    });
+
+    this.getGifs()
   }
 
   render() {
-    console.log(this.state.gifs);
-    console.log(this.state.gif_url);
     const { gifs } = this.state;
+    console.log(gifs)
 
     const giphys = gifs.map(gif => {
       return (
@@ -35,6 +54,7 @@ export class Gifs extends Component {
       <div className="space">
         <h1 className="Title"> Giphy Like</h1>
         {giphys}
+        <button onClick={this.getMoreGifs}> Get More Gifs</button>
       </div>
     );
   }

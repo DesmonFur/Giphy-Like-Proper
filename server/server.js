@@ -11,7 +11,7 @@ app.use(cors())
 
 app.get('/api/getGifs', fetching.getGifs)
 app.post('/api/storeData', fetching.callForData)
-
+app.delete('/api/noDupes', fetching.deleteDupes)
 
 
 massive(CONNECTION_STRING).then(db => {
